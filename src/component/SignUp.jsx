@@ -3,14 +3,15 @@ import { BACKGROUND_IMAGE } from "../../utils/mockedData";
 const HomePage = () => {
   return (
     <>
-    <div className="relative">
+    <div className="relative h-screen">
       <Header />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black opacity-60"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black"></div>
 
-      <img src={BACKGROUND_IMAGE} />
+      <img className="w-screen h-screen bg-gradient-to-t from-black" src={BACKGROUND_IMAGE} />
+      <div className="flex justify-center items-center">
 
-      <div className="  absolute top-40 left-[30rem] h-[25rem] w-[36%] mx-auto border-solid border-2 border-white text-white ">
+      <div className="absolute top-40  min-h-fit w-[30rem]   text-white">
         <h1 className="text-5xl font-extrabold  text-center">
           Unlimited movies, TV shows and more
         </h1>
@@ -31,16 +32,17 @@ const HomePage = () => {
           </button>
         </div>
       </div>
+      </div>
     </div>
     {/* --------------------------------------------------------------------------------------------------------------- */}
-    <div className="bg-black text-white h-screen  border-solid border-2 border-red-600 ">
+    {/* <div className="bg-black text-white h-screen  border-solid border-2 border-red-600 ">
         <div className="w-[80%] mx-auto  border-solid border-2 border-green-500 mt-4">
-        <h2 className="mt-0 mb-4">Trending Now</h2>
+        <h2 className="mt-0 mb-4">Trending Now</h2> */}
         {/* <TrendingNow/>
       <span className="inline-block h-56 ml-4 w-40 border-solid border-2 border-white">usama</span>
       <span className="inline-block h-56 ml-4 w-40 border-solid border-2 border-white">talha khan</span> */}
 
-        </div>
+        {/* </div> */}
       
       {/* <div className="bg-black">
          <label className="" for="country"></label>
@@ -54,7 +56,7 @@ const HomePage = () => {
  
     
     
-      </div>
+      {/* </div> */}
 
 
       
