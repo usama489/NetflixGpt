@@ -24,7 +24,7 @@ const Login = () => {
   const handleButtonClick = () => {
     const message = checkValidData(email.current.value, password.current.value);
    
-    if (message) return;
+    if (message) return {message};
 
     if (!isSignInForm) {
       //signup logic
@@ -43,7 +43,7 @@ const Login = () => {
             // Profile updated!
             const {uid,email,displayName,photoURL} = auth.currentUser; //updated auth info of the current user
             dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
-            navigate("/browse")
+            // navigate("/browse")
           }).catch((error) => {
             // An error occurred
             setErrorMessage(error.message)
@@ -65,7 +65,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
-          navigate("/browse")
+          // navigate("/browse")
         })
         .catch((error) => {
           const errorCode = error.code;
