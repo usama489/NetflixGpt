@@ -71,7 +71,7 @@ const Header = () => {
         console.log("signout button failed to signout a user");
       });
   };
-  console.log(user);
+  // console.log(user);
 
 
   return (
