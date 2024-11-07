@@ -1,6 +1,6 @@
 const SecondaryContainer = ()=>{
     return(
-        <div>main</div>
+        <div></div>
     )
 }
 export default SecondaryContainer;
