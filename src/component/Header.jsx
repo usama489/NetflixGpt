@@ -1,26 +1,4 @@
-// import {NETFLIX_LOGO } from "../../utils/mockedData";
-// import { Link } from "react-router-dom";
-// import { useSelector,useDispatch } from "react-redux";
-
-// const Header = ()=>{
-//     const user = useSelector((state)=>state.user);
-//     console.log(user);
-
-//     return(
-//         <div className="h-24 absolute  flex w-full justify-between items-center z-10  inset-0  bg-gradient-to-b
-//          from-slate-950">
-//             <img className="h-16 " alt="logo image not available" src={NETFLIX_LOGO}/>
-//             <Link to="/login">
-//             <button className="text-lg my-auto mr-4 w-20 font-bold border-solid bg-white rounded-xl h-10">SignIn</button>
-//             </Link>
-
-//         </div>
-//     )
-// }
-// export default Header;
-
-// Header.js
-import { NETFLIX_LOGO, PHOTO_URL } from "../../utils/mockedData";
+import { NETFLIX_LOGO, PHOTO_URL, SUPPORTED_LANGUAGES } from "../../utils/mockedData";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { auth } from "../../utils/firebase";
@@ -28,9 +6,14 @@ import { removeUser } from "../../utils/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect,useState } from "react";
 import { addUser } from "../../utils/userSlice";
+import { toggleGptSearchView } from "../../utils/gptSlice";
+import { changeLanguage } from "../../utils/configSlice";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store)=>store.gpt.showGptSearch);
+  // console.log(showGptSearch);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -59,6 +42,11 @@ const Header = () => {
 
 },[])
 
+const handleGptSearchClick = ()=>{
+  //Togle Gpt Search Button
+  dispatch(toggleGptSearchView())
+}
+
   const handleSignOut = () => {
     auth
       .signOut()
@@ -72,6 +60,12 @@ const Header = () => {
       });
   };
   // console.log(user);
+  const handleLanguageChange = (e)=>{
+    // console.log(e.target.value);
+    dispatch(changeLanguage(e.target.value))
+   
+  }
+
 
 
   return (
@@ -81,10 +75,27 @@ const Header = () => {
     <div className="h-24 absolute flex w-full justify-between items-center z-10 inset-0 bg-gradient-to-b from-slate-950 ">
       <div> <img className="h-16" alt="logo image not available" src={NETFLIX_LOGO} /></div>
     
-      <div className=" flex justify-center items-center ">
+      <div className=" flex justify-center items-center  ">
  
           {user || user?.displayName === true ? (
             <>
+            {showGptSearch &&
+           
+              <select className="" onChange={handleLanguageChange}>
+                {
+                  SUPPORTED_LANGUAGES.map((lang)=> <option key = {lang.identifier} value={lang.identifier}>{lang.name}</option>
+                 )
+                }
+             
+            </select>
+              }
+
+         
+                
+
+            
+          
+            <button className="text-white bg-purple-400 h-10 w-20 rounded-sm mr-2" onClick={handleGptSearchClick}>{showGptSearch?"HomePage":"GptSearch"}</button>
              <img className="  h-10 w-10 mr-2 " src={PHOTO_URL}/>
               <button onClick = {handleSignOut} className="text-lg text-black my-auto mr-4 w-20 font-bold border-solid bg-white rounded-xl h-10">
                Signout
