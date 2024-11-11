@@ -10,3 +10,5 @@ export const API_OPTION = {
 };
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500/"
 export const SUPPORTED_LANGUAGES = [{identifier:"en",name:"English"},{identifier:"hindi",name:"Hindi"},{identifier:"spanish",name:"Spanish"}]
+export const OPENAI_KEY = "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"
+// export const GPT_QUERY = 
