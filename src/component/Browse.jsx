@@ -6,10 +6,11 @@ import Header from "./Header";
 import useUpComingMovies from "../hooks/useUpComingMovies";
 import GptSearch from "./GptSearch";
 import { useSelector } from "react-redux";
-
+import "./browse.css";
 
 
 const Browse = ()=>{
+   
 
     const showGptSearch = useSelector((store)=>store.gpt.showGptSearch)
     console.log(showGptSearch);

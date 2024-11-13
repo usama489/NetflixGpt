@@ -2,52 +2,62 @@ import MovieCard from "./MovieCard";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import React,{useRef} from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { CleanHands } from "@mui/icons-material";
 
 const MovieList = ({title,movies})=>{
+  
     const scrollRef = useRef(null);
     const handleBack = ()=>{
+        console.log("handleback");
         if(scrollRef.current){
-            scrollRef.current.scrollBy({left:-200,behavior:"smooth"})
+            scrollRef.current.scrollBy({left:-300,behavior:"smooth"})
         }
        
 
     }
     const handleForward = ()=>{
+        console.log("handleForward");
+        console.log(scrollRef.current);
         if(scrollRef.current){
-            scrollRef.current.scrollBy({left:200,behavior:"smooth"})
+            scrollRef.current.scrollBy({left:300,behavior:"smooth"})
         }
         
     }
     
     return (
-        <div className="title w-full flex-nowrap">
-            <h1 className="text-xl mx-8 font-bold text-white">{title}</h1>
+        <>
+        <h1 className="text-xl mx-8 font-bold text-white">{title}</h1> 
+        <div className="flex">
+              <span className="flex text-white cursor-pointer h-8  my-auto ">
+                 <ArrowBackIcon onClick={handleBack}/>
+              </span> 
 
-        <div className="MovieListContainer  flex items-center  -ml-7  w-full">
-            <span className="flex text-white cursor-pointer h-8  my-auto "><ArrowBackIcon onClick={handleBack}/></span>
-            {/* scrollbar movie card container */}
-            <div className="MovieCardContainer flex  overflow-x-hidden scrollbar-hide   " ref={scrollRef}>
-            
-              
-                <div className="flex ml-2  mt-2">
+            <div className=" MovieCardContainer flex overflow-x-auto scrollbar-hide" 
+              style={{maxWidth:"100vw"}} ref={scrollRef}>
+           
+            {movies && movies?.map((movie)=>(
                 
-                  
-               {movies && movies?.map((movie)=>(<MovieCard key={movie.id} posterPath={movie.poster_path}/>)) }
-              
-           
+               <div className="flex"  > <MovieCard key={movie.id} posterPath={movie.poster_path}/> </div>
+                   
+                   
+             )) }
+               
+             </div>
+             <span className=" text-white cursor-pointer h-8  my-auto "><ArrowForwardIcon onClick={handleForward}/></span> 
+             
+             </div>
 
-            </div>
-           
-           
-            </div>
-            <span className="flex  text-white h-8  my-auto cursor-pointer "><ArrowForwardIcon onClick={handleForward}/></span>
-            
-
-        </div>
-        </div>
+    </>     
     )
    
        
    
 }
 export default MovieList;
+
+
+
+
